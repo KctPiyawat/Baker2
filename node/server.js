@@ -1,8 +1,20 @@
-const express = require('express')
+const objExpress = require('express')
+const objBodyParser = require('body-parser')
+const app = objExpress();
 
-const app = express()
+app.use(objBodyParser.json)
+app.use(objBodyParser.urlencoded)
 
-app.get('/', (req,res) =>{res.end('Welcome to Root Path')})
-app.get('/api',(req,res) => {res.end('This is API')})
+app.get('/',(req,res) => {
+  res.end('Data From Node')
 
-app.listen(3000,() => {console.log('Sever Node Working123')})
+});
+
+app.get('/api',(req,res) =>{
+  const objFeedback = req.body.objFeedback
+  res.end('Feedback from Server ==>' + objFeedback)
+});
+
+app.listen(3000,() => {
+  console.log('Sever Node Working')
+})
